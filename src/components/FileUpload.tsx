@@ -11,7 +11,7 @@ import {
   X,
 } from 'lucide-react';
 import type { ChangeEvent } from 'react';
-import { useRef, useState } from 'react';
+import { useState, useRef  } from 'react';
 
 type FileWithProgress = {
   id: string;
@@ -57,31 +57,13 @@ export function FileUpload() {
       formData.append('file', fileWithProgress.file);
 
       try {
-        await axios.post('https://httpbin.org/post', formData, {
-          onUploadProgress: (progressEvent) => {
-            const progress = Math.round(
-              (progressEvent.loaded * 100) / (progressEvent.total || 1),
-            );
-            setFiles((prevFiles) =>
-              prevFiles.map((file) =>
-                file.id === fileWithProgress.id ? { ...file, progress } : file,
-              ),
-            );
-          },
-        });
-
-        setFiles((prevFiles) =>
-          prevFiles.map((file) =>
-            file.id === fileWithProgress.id
-              ? { ...file, uploaded: true }
-              : file,
-          ),
-        );
+        await axios.post('https://chevy-distributed-draws-jewel.trycloudflare.com/images/upload', formData);
       } catch (error) {
         console.error(error);
       }
     });
 
+    await console.log(axios.get('https://chevy-distributed-draws-jewel.trycloudflare.com/images/hello'));// TODO: test this
     await Promise.all(uploadPromises);
 
     setUploading(false);
