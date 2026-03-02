@@ -1,3 +1,4 @@
+//TODO: Improve UI, make it like photos, try to set it up on Linux Mint
 import axios from 'axios';
 import {
   FileAudio,
