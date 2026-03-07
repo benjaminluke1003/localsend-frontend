@@ -1,14 +1,14 @@
 @import "tailwindcss";
 
 @theme{
---color-primary-500: '#faf5cf';
---color-primary-700: '#a37d54',
---color-grayscale-200: '#e6e6e6';
---color-grayscale-400: '#c4c4c4';
---color-grayscale-700: '#2b2b2b';
---color-grayscale-800: '#1a1a1a';
---color-grayscale-900: '#000';
---font-manrope:['Manrope'];
+--color-primary-500: #faf5cf;
+--color-primary-700: #a37d54,
+--color-grayscale-200: #e6e6e6;
+--color-grayscale-400: #c4c4c4;
+--color-grayscale-700: #2b2b2b;
+--color-grayscale-800: #1a1a1a;
+--color-grayscale-900: #000;
+--font-manrope: "Manrope", sans-serif;
 }
 
 @layer base {
