@@ -1,4 +1,3 @@
-//TODO: Improve UI, make it like photos, try to set it up on Linux Mint
 import axios from 'axios';
 import {
   FileAudio,
@@ -53,7 +52,7 @@ export function FileUpload() {
 
     setUploading(true);
 
-    const uploadPromises = files.map(async (fileWithProgress) => {
+      const uploadPromises = files.map(async (fileWithProgress) => {
       const formData = new FormData();
       formData.append('file', fileWithProgress.file);
 
@@ -64,7 +63,6 @@ export function FileUpload() {
       }
     });
 
-    await console.log(axios.get('https://chevy-distributed-draws-jewel.trycloudflare.com/images/hello'));// TODO: test this
     await Promise.all(uploadPromises);
 
     setUploading(false);
@@ -100,11 +98,12 @@ export function FileUpload() {
 
 type FileInputProps = {
   inputRef: React.RefObject<HTMLInputElement>;
+  onUpload: () => void;
   disabled: boolean;
   onFileSelect: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
-function FileInput({ inputRef, disabled, onFileSelect }: FileInputProps) {
+function FileInput({ inputRef, onUpload, disabled, onFileSelect }: FileInputProps) {
   return (
     <>
       <input
@@ -115,6 +114,7 @@ function FileInput({ inputRef, disabled, onFileSelect }: FileInputProps) {
         className="hidden"
         id="file-upload"
         disabled={disabled}
+        onClick={onUpload}
       />
       <label
         htmlFor="file-upload"
@@ -136,14 +136,14 @@ type ActionButtonsProps = {
 function ActionButtons({ onUpload, onClear, disabled }: ActionButtonsProps) {
   return (
     <>
-      <button
+      {/* <button
         onClick={onUpload}
         disabled={disabled}
         className="flex items-center gap-2"
       >
         <Upload size={18} />
         Upload
-      </button>
+      </button> */}
       <button
         onClick={onClear}
         className="flex items-center gap-2"
