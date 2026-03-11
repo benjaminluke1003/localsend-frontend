@@ -7,7 +7,6 @@ import {
   FileVideo,
   Plus,
   Trash2,
-  Upload,
   X,
 } from 'lucide-react';
 import type { ChangeEvent } from 'react';
@@ -178,7 +177,6 @@ type ActionButtonsProps = {
 function ActionButtons({ onClear, disabled }: ActionButtonsProps) {
   return (
     <>
-    
       <button
         onClick={onClear}
         className="flex items-center gap-2"
