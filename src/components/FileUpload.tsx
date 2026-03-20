@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { Album } from './Album'
+
 import {
   FileAudio,
   FileIcon,
@@ -10,7 +12,7 @@ import {
   X,
 } from 'lucide-react';
 import type { ChangeEvent } from 'react';
-import { useState, useRef  } from 'react';
+import { useState, useRef } from 'react';
 
 type FileWithProgress = {
   id: string;
@@ -25,6 +27,17 @@ export function FileUpload() {
 
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const [current, setCurrent] = useState(0);
+  const prevSlide = ()=>{
+  if(current === 0) setCurrent(albums.length - 1);
+  else setCurrent(current - 1);
+  }
+  const nextSlide = ()=>{
+  if(current === albums.length - 1) setCurrent(0);
+  else setCurrent(current + 1);
+  }
+  const albums = [
+  ]
   function handleFileSelect(e: ChangeEvent<HTMLInputElement>) {
     if (!e.target.files?.length) {
       return;
@@ -51,7 +64,7 @@ export function FileUpload() {
 
     setUploading(true);
 
-      const uploadPromises = files.map(async (fileWithProgress) => {
+    const uploadPromises = files.map(async (fileWithProgress) => {
       const formData = new FormData();
       formData.append('file', fileWithProgress.file);
 
@@ -78,19 +91,39 @@ export function FileUpload() {
   return (
     <div className="flex flex-col gap-4">
       <h2 className="text-xl font-bold">File Upload</h2>
-      <div id="album-caroussel" className='flex flex-row gap-3 items-center'>
-        <button className='w-10 h-10'>
-<span className="inline-flex ;w-10 h-10 rounded-base bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-            <svg className="w-5 h-5 text-white rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m15 19-7-7 7-7"/></svg>
-            <span className="sr-only">Previous</span>
-        </span>
-        </button>
-  <div className="w-32 h-32 bg-blue-500 rounded-full shadow-lg flex items-center justify-center text-white text-lg"></div>
-  <div className="w-32 h-32 bg-blue-500 rounded-full shadow-lg flex items-center justify-center text-white text-lg"></div>
-  <div className="w-32 h-32 bg-blue-500 rounded-full shadow-lg flex items-center justify-center text-white text-lg"></div>
-        <button className='w-12 h-12'></button>
-      </div>
 
+
+
+
+      <div id="controls-carousel" className="overflow-hidden flex gap-3 relative w-full px-20" >
+
+        {/* <!-- Carousel wrapper --> */}
+        <div className={`relative gap-3 flex flex-row transition ease-out duration-400 `}
+         style={{
+          transform: `translateX(-${current * 32}%)`,
+         }} 
+          >
+
+      {albums.map((album) => (
+        <Album album={album} key={album.id} />
+      ))}
+      </div>
+        {/* <!-- Slider controls --> */}
+        <button onClick={prevSlide} type="button" className="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+          <span className="inline-flex items-center justify-center w-10 h-10 rounded-base bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+            <svg className="w-5 h-5 text-white rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m15 19-7-7 7-7" /></svg>
+            <span className="sr-only">Previous</span>
+          </span>
+        </button>
+
+        <button type="button" onClick={nextSlide} className="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+          <span className="inline-flex items-center justify-center w-10 h-10 rounded-base bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+            <svg className="w-5 h-5 text-white rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 5 7 7-7 7" /></svg>
+            <span className="sr-only">Next</span>
+          </span>
+        </button>
+
+        </div>
 
       <div className="flex gap-2">
 
