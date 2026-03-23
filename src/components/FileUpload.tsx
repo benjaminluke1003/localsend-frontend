@@ -37,6 +37,20 @@ export function FileUpload() {
   else setCurrent(current + 1);
   }
   const albums = [
+    { id: 1, img: "https://cdn.worldvectorlogo.com/logos/java.svg"},
+    { id: 2, img: "https://cdn.worldvectorlogo.com/logos/java.svg"},
+    { id: 3, img: "https://cdn.worldvectorlogo.com/logos/java.svg"},
+    { id: 4, img: "https://cdn.worldvectorlogo.com/logos/java.svg"},
+    { id: 5, img: "https://cdn.worldvectorlogo.com/logos/java.svg"},
+    { id: 6, img: "https://cdn.worldvectorlogo.com/logos/java.svg"},
+    { id: 7, img: "https://cdn.worldvectorlogo.com/logos/java.svg"},
+    { id: 8, img: "https://cdn.worldvectorlogo.com/logos/java.svg"},
+    { id: 9, img: "https://cdn.worldvectorlogo.com/logos/java.svg"},
+    { id: 10, img: "https://cdn.worldvectorlogo.com/logos/java.svg"},
+    { id: 11, img: "https://cdn.worldvectorlogo.com/logos/java.svg"},
+    { id: 12, img: "https://cdn.worldvectorlogo.com/logos/java.svg"},
+    { id: 13, img: "https://cdn.worldvectorlogo.com/logos/java.svg"},
+    { id: 14, img: "https://cdn.worldvectorlogo.com/logos/java.svg"},
   ]
   function handleFileSelect(e: ChangeEvent<HTMLInputElement>) {
     if (!e.target.files?.length) {
@@ -233,7 +247,7 @@ function FileItem({ file, onRemove, uploading }: FileItemProps) {
   const Icon = getFileIcon(file.file.type);
 
   return (
-    <div className="space-y-2 rounded-md bg-grayscale-700 p-4">
+    <div className="space-y-2 rounded-md bg-pink-900 p-4">
       <div className="flex items-start justify-between">
         <div className="flex items-center gap-3">
           <Icon size={40} className="text-primary-500" />
